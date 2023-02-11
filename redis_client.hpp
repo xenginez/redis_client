@@ -719,14 +719,29 @@ namespace redis
 		}
 
 	public:
+		void ping( result_callback_t callback )
+		{
+			command( { "PING" }, std::move( callback ) );
+		}
+
+		void echo( std::string_view message, result_callback_t callback )
+		{
+			command( { "ECHO", message }, std::move( callback ) );
+		}
+
 		void auth( std::string_view password, result_callback_t callback )
 		{
 			command( { "AUTH", password }, std::move( callback ) );
 		}
 
-		void ping( result_callback_t callback )
+		void select( int index, result_callback_t callback )
 		{
-			command( { "PING" }, std::move( callback ) );
+			command( { "SELECT", std::to_string( index ) }, std::move( callback ) );
+		}
+
+		void quit( result_callback_t callback )
+		{
+			command( { "QUIT" }, std::move( callback ) );
 		}
 
 	public:

@@ -33,6 +33,12 @@ int main()
 	c.hdel( "hash", "abc", []( redis::value result ) { std::cout << "hdel: " << result.get_int() << std::endl; } );
 	c.input( buf.begin(), buf.begin() + socket.read_some( asio::buffer( buf ) ) );
 
+	c.quit( []( redis::value result ) { std::cout << "quit: " << result.get_string() << std::endl; } );
+	c.input( buf.begin(), buf.begin() + socket.read_some( asio::buffer( buf ) ) );
+
+	std::error_code ec;
+	socket.read_some( asio::buffer( buf ), ec );
+	std::cout << ec.message() << std::endl;
 
 	return 0;
 }
