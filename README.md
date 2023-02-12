@@ -7,10 +7,6 @@ redis_client是Redis数据库的C++客户端。
 -------
 * A single header file.
 * 仅单头文件。
-* All redis commands are supported.
-* 支持所有redis命令。
-* Pipeline mode.
-* 流水线模式。
 * Support for Publish and Subscribe.
 * 支持发布和订阅。
 * All network frameworks are supported.
@@ -18,7 +14,6 @@ redis_client是Redis数据库的C++客户端。
 
 ## Usage
 -------
-
 ``` C++
 #include "redis_client.hpp"
 
@@ -33,7 +28,7 @@ int main()
 
 	c.ping( []( redis::value result ) { std::cout << result.get_string() << std::endl; } );
 	c.input( buf.begin(), buf.begin() + socket.read_some( asio::buffer( buf ) ) );
-	
+
 	return 0;
 }
 ``` 
